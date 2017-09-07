@@ -3,7 +3,7 @@ defmodule Git.Mixfile do
 
   def project do
     [app: :git_cli,
-     version: "0.2.3",
+     version: "0.2.4",
      elixir: "~> 1.0",
      name: "git_cli",
      source_url: "https://github.com/tuvistavie/elixir-git-cli",
@@ -12,6 +12,7 @@ defmodule Git.Mixfile do
      description: description(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     dialyzer: [ flags: [:unmatched_returns, :error_handling, :underspecs]],
      deps: deps()]
   end
 
@@ -20,8 +21,9 @@ defmodule Git.Mixfile do
   end
 
   defp deps do
-    [{:earmark, "~> 0.2", only: :dev},
+    [{:earmark, "~> 1.0", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev},
+     {:dialyxir, "~> 0.5", only: [:dev, :test]},
      {:temp, "~> 0.4", only: :test}]
   end
 
